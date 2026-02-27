@@ -2,7 +2,9 @@
 
 import * as React from "react";
 import * as RechartsPrimitive from "recharts";
-import type { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent";
+
+type TooltipValue = number | string | ReadonlyArray<number | string>;
+type TooltipName = number | string;
 
 import { cn } from "@/lib/utils";
 
@@ -119,7 +121,7 @@ function ChartTooltipContent({
   color,
   nameKey,
   labelKey,
-}: RechartsPrimitive.TooltipContentProps<ValueType, NameType> &
+}: RechartsPrimitive.TooltipContentProps<TooltipValue, TooltipName> &
   React.ComponentProps<"div"> & {
     hideLabel?: boolean;
     hideIndicator?: boolean;
