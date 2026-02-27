@@ -58,7 +58,7 @@ app/                          # Next.js App Router (라우팅만 담당)
 ├── api/auth/                 # Better Auth HTTP handler
 └── layout.tsx
 
-middleware.ts                     # Next.js 미들웨어 (인증 라우트 보호)
+proxy.ts                          # Next.js Proxy (인증 라우트 보호)
 
 domain/                       # 도메인 레이어 (Bounded Context)
 ├── auth/                     # ──────── 인증 도메인 (Better Auth) ────────
@@ -150,10 +150,10 @@ db/, server/api/
 - `publicProcedure` - 인증 불필요한 공개 엔드포인트
 - `protectedProcedure` - Better Auth 세션 검증 필요, `ctx.session` 보장
 
-**Auth & Middleware**:
+**Auth & Proxy**:
 - Better Auth 서버 인스턴스: `domain/auth/auth.ts` (서버 전용)
 - Better Auth 클라이언트: `domain/auth/auth-client.ts` (클라이언트 컴포넌트용)
-- `middleware.ts` - 인증 라우트 보호 (`/dashboard/*` 보호, `/login`, `/signup` 리다이렉트)
+- `proxy.ts` - 인증 라우트 보호 (`/dashboard/*` 보호, `/login`, `/signup` 리다이렉트)
 
 **Styling**:
 - class-variance-authority (CVA)로 컴포넌트 variants 정의
