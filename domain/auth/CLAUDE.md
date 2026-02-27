@@ -99,6 +99,15 @@ Better Auth가 사용하는 테이블은 `db/schema/auth.ts`에 정의되어 있
 | `authAccount` | `account` | OAuth 계정 연동 |
 | `authVerification` | `verification` | 이메일 인증 등 |
 
+## `user` vs `users` 테이블
+
+Better Auth의 `user` 테이블(`db/schema/auth.ts`)과 기존 `users` 테이블(`db/schema/users.ts`)은 별개입니다:
+
+- **`user` (Better Auth)**: 인증 전용. Better Auth가 내부적으로 관리 (회원가입, 로그인, 세션).
+- **`users` (앱)**: 앱의 비즈니스 로직용 사용자 데이터.
+
+추후 통합이 필요하면 기존 `users` 테이블을 Better Auth의 `user` 테이블로 마이그레이션하거나, Better Auth의 `user.additionalFields` 설정으로 확장할 수 있습니다.
+
 ## 확장 가이드
 
 ### OAuth 프로바이더 추가
