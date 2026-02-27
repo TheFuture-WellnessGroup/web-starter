@@ -3,6 +3,7 @@
 비즈니스 도메인별로 분리된 Bounded Context를 관리하는 레이어입니다.
 
 **하위 도메인**:
+- [auth/](./auth/CLAUDE.md) - 인증/인가 (Better Auth)
 - [user/](./user/CLAUDE.md) - 사용자 관리
 - [shared/](./shared/CLAUDE.md) - 도메인 간 공유 코드
 

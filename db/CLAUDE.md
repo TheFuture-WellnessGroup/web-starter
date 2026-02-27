@@ -8,6 +8,7 @@ PostgreSQL 데이터베이스 스키마와 연결을 관리합니다.
 db/
 ├── schema/
 │   ├── users.ts      # users 테이블 스키마
+│   ├── auth.ts       # Better Auth 테이블 (user, session, account, verification)
 │   └── index.ts      # 스키마 re-export
 └── index.ts          # DB 연결 인스턴스
 ```

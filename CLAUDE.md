@@ -16,6 +16,14 @@ npm run db:studio    # Drizzle Studio 실행
 npm run docker:dev   # PostgreSQL 컨테이너 실행
 ```
 
+## Environment Variables
+
+| 변수 | 설명 | 예시 |
+|------|------|------|
+| `DATABASE_URL` | PostgreSQL 연결 URL | `postgresql://...` |
+| `BETTER_AUTH_SECRET` | 인증 시크릿 키 (32자 이상) | `openssl rand -base64 32`로 생성 |
+| `BETTER_AUTH_URL` | 앱 URL | `http://localhost:3000` |
+
 ## Architecture
 
 **Tech Stack**: Next.js 16 (App Router) + React 19 + TypeScript + Tailwind CSS 4 + tRPC v11
@@ -47,9 +55,17 @@ app/                          # Next.js App Router (라우팅만 담당)
 │   │   └── page.tsx
 │   └── ...
 ├── api/trpc/                 # tRPC HTTP handler
+├── api/auth/                 # Better Auth HTTP handler
 └── layout.tsx
 
+middleware.ts                     # Next.js 미들웨어 (인증 라우트 보호)
+
 domain/                       # 도메인 레이어 (Bounded Context)
+├── auth/                     # ──────── 인증 도메인 (Better Auth) ────────
+│   ├── auth.ts               # Better Auth 서버 인스턴스
+│   ├── auth-client.ts        # Better Auth 클라이언트
+│   └── index.ts              # Public API
+│
 ├── user/                     # ──────── 사용자 도메인 ────────
 │   ├── models/               # 도메인 모델, 타입, Zod 스키마
 │   │   ├── User.ts
@@ -84,6 +100,7 @@ lib/                          # 인프라 유틸리티
 
 **폴더별 상세 지침**: 각 폴더의 `CLAUDE.md` 참조
 - [domain/](./domain/CLAUDE.md) - 도메인 레이어
+  - [domain/auth/](./domain/auth/CLAUDE.md) - 인증/인가 (Better Auth)
 - [app/](./app/CLAUDE.md) - Next.js 페이지
 - [components/](./components/CLAUDE.md) - UI 컴포넌트
 - [db/](./db/CLAUDE.md) - 데이터베이스
@@ -130,6 +147,13 @@ db/, server/api/
 - 환경변수: `lib/env.ts`에서 zod로 검증
 - Server Component에서 tRPC: `const caller = await api();`
 - Client Component에서 tRPC: `trpc.router.procedure.useQuery()`
+- `publicProcedure` - 인증 불필요한 공개 엔드포인트
+- `protectedProcedure` - Better Auth 세션 검증 필요, `ctx.session` 보장
+
+**Auth & Middleware**:
+- Better Auth 서버 인스턴스: `domain/auth/auth.ts` (서버 전용)
+- Better Auth 클라이언트: `domain/auth/auth-client.ts` (클라이언트 컴포넌트용)
+- `middleware.ts` - 인증 라우트 보호 (`/dashboard/*` 보호, `/login`, `/signup` 리다이렉트)
 
 **Styling**:
 - class-variance-authority (CVA)로 컴포넌트 variants 정의
