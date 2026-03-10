@@ -5,7 +5,7 @@ export { auth } from "./auth";
 export {
   authClient,
   signIn,
-  signUp,
   signOut,
+  signUp,
   useSession,
 } from "./auth-client";

@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { users } from "@/db/schema";
-import type { User, NewUser, UpdateUserInput } from "./models";
+import type { NewUser, UpdateUserInput, User } from "./models";
 
 export const userRepository = {
   findAll: async (): Promise<User[]> => {
@@ -28,7 +28,7 @@ export const userRepository = {
   },
 
   delete: async (id: string): Promise<boolean> => {
-    const result = await db.delete(users).where(eq(users.id, id));
+    const _result = await db.delete(users).where(eq(users.id, id));
     return true;
   },
 };

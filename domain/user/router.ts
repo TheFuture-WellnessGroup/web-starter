@@ -1,7 +1,7 @@
 import { z } from "zod/v4";
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
-import { userRepository } from "./repository";
 import { createUserSchema, updateUserSchema } from "./models";
+import { userRepository } from "./repository";
 
 export const userRouter = createTRPCRouter({
   list: publicProcedure.query(async () => {

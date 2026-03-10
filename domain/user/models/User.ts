@@ -1,6 +1,6 @@
+import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
 import { z } from "zod/v4";
 import type { users } from "@/db/schema";
-import type { InferSelectModel, InferInsertModel } from "drizzle-orm";
 
 // Drizzle 스키마에서 타입 추론
 export type User = InferSelectModel<typeof users>;

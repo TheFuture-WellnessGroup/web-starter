@@ -1,7 +1,7 @@
-import { z } from "zod/v4";
 import { eq } from "drizzle-orm";
+import { z } from "zod/v4";
+import { insertUserSchema, users } from "@/db/schema";
 import { createTRPCRouter, publicProcedure } from "../trpc";
-import { users, insertUserSchema } from "@/db/schema";
 
 export const userRouter = createTRPCRouter({
   list: publicProcedure.query(async ({ ctx }) => {
