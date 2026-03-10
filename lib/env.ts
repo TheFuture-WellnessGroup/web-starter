@@ -17,7 +17,10 @@ function parseEnv() {
 
   const parsed = envSchema.safeParse(process.env);
   if (!parsed.success) {
-    console.error("❌ Invalid environment variables:", z.prettifyError(parsed.error));
+    console.error(
+      "❌ Invalid environment variables:",
+      z.prettifyError(parsed.error),
+    );
     throw new Error("Invalid environment variables");
   }
   return parsed.data;
