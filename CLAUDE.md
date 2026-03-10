@@ -5,15 +5,15 @@ Next.js 16 + React 19 스타터 템플릿
 ## Development Commands
 
 ```bash
-npm run dev          # 개발 서버 (http://localhost:3000)
-npm run build        # 프로덕션 빌드
-npm run lint         # Biome 린트 검사
-npm run format       # Biome 포맷팅 적용
+bun dev              # 개발 서버 (http://localhost:3000)
+bun run build        # 프로덕션 빌드
+bun run lint         # Biome 린트 + fix
+bun run format       # Biome 린트 + 포맷팅 (unsafe fix 포함)
 
 # Database (Drizzle ORM)
-npm run db:push      # 스키마를 DB에 직접 푸시 (개발용)
-npm run db:studio    # Drizzle Studio 실행
-npm run docker:dev   # PostgreSQL 컨테이너 실행
+bun run db:push      # 스키마를 DB에 직접 푸시 (개발용)
+bun run db:studio    # Drizzle Studio 실행
+bun run docker:dev   # PostgreSQL 컨테이너 실행
 ```
 
 ## Environment Variables
@@ -180,9 +180,9 @@ db/, server/api/
 ## Testing Changes
 
 ```bash
-npx tsc --noEmit    # 타입 체크
-npm run lint         # 린트
-npm run build        # 빌드 검증
+bunx tsc --noEmit    # 타입 체크
+bun run lint         # 린트
+bun run build        # 빌드 검증
 ```
 
 ## Agent Instructions
